@@ -2,15 +2,15 @@
 #include <vector>
 #include <tuple>
 #include <cstdint>
-struct Syntax {
-	virtual std::string write(const std::vector<std::tuple<std::size_t, std::size_t, std::size_t>> &maps, const std::string &prefix) = 0;
-};
-struct SyntaxC : Syntax {
-	virtual std::string write(const std::vector<std::tuple<std::size_t, std::size_t, std::size_t>> &maps, const std::string &prefix);
-};
-struct SyntaxCpp : Syntax {
-	virtual std::string write(const std::vector<std::tuple<std::size_t, std::size_t, std::size_t>> &maps, const std::string &prefix);
-};
-struct SyntaxES : Syntax {
-	virtual std::string write(const std::vector<std::tuple<std::size_t, std::size_t, std::size_t>> &maps, const std::string &prefix);
-};
+#include "MapContext.h"
+namespace rmap {
+	struct SyntaxC {
+		std::string write(const MapContext &mapContext);
+	};
+	struct SyntaxCpp {
+		std::string write(const MapContext &mapContext);
+	};
+	struct SyntaxES {
+		std::string write(const MapContext &mapContext);
+	};
+}

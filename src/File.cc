@@ -1,12 +1,12 @@
-#pragma once
+#include "File.h"
 #include <cerrno>
 #include <cstring>
-#include <fstream>
-void fail(const std::string &message) {
+#include <iostream>
+void rmap::File::fail(const std::string &message) {
 	std::cerr << message << std::endl;
 	std::exit(EXIT_FAILURE);
 }
-auto open(const std::string &filename) {
+std::ifstream rmap::File::open(const std::string &filename) {
 	std::ifstream file;
 	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	try {

@@ -70,8 +70,9 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GLOBAL_CXX_RELEASE_FLAGS}")
 SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${GLOBAL_CXX_DEBUG_FLAGS}")
 add_executable(${PROJECT_NAME}
 	src/${PROJECT_NAME}.cc
-	src/Syntax.cc
+	src/File.cc
 	src/Format.cc
+	src/Syntax.cc
 )
 add_dependencies(${PROJECT_NAME} apx-git)
 target_link_libraries(${PROJECT_NAME}

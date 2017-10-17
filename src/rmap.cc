@@ -65,15 +65,15 @@ int main(int argc, const char *argv[]) {
 	const auto prefix = "lol::what";
 	const auto yamlConfig = YAML::LoadFile(rangesPath);
 	if (syntax == "c") {
-		auto pipe = Pipe<SyntaxC>(inputPath, outputPath, prefix);
+		auto pipe = rmap::Pipe<rmap::SyntaxC>(inputPath, outputPath, prefix);
 		descend(yamlConfig, pipe);
 	}
 	else if (syntax == "c++") {
-		auto pipe = Pipe<SyntaxCpp>(inputPath, outputPath, prefix);
+		auto pipe = rmap::Pipe<rmap::SyntaxCpp>(inputPath, outputPath, prefix);
 		descend(yamlConfig, pipe);
 	}
 	else if (syntax == "es") {
-		auto pipe = Pipe<SyntaxES>(inputPath, outputPath, prefix);
+		auto pipe = rmap::Pipe<rmap::SyntaxES>(inputPath, outputPath, prefix);
 		descend(yamlConfig, pipe);
 	}
 }
