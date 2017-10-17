@@ -26,6 +26,18 @@ int main(int argc, const char *argv[]) {
 		})
 		.option([](auto &&config) {
 			config
+				.flag('p')
+				.flag("prefix")
+				.description("Specifies a prefix for the generated address mapper that should appear before the function name. This is ideal if you need to specify a C++ namespace or are having trouble with a name clash in C.")
+				.argument([](auto &&config) {
+					config
+						.name("text")
+						.optional("")
+						.description("A text prefix that will be placed before the address-mapping function name.");
+				});
+		})
+		.option([](auto &&config) {
+			config
 				.flag('s')
 				.flag("syntax")
 				.description("Specifies the syntax for the emitted module")
@@ -62,7 +74,7 @@ int main(int argc, const char *argv[]) {
 	const auto inputPath = config.argument["INPUT"].as<std::string>();
 	const auto outputPath = config.argument["OUTPUT"].as<std::string>();
 	const auto syntax = config.option["syntax"]["name"].as<std::string>();
-	const auto prefix = "lol::what";
+	const auto prefix = config.option["prefix"]["text"].as<std::string>();
 	const auto yamlConfig = YAML::LoadFile(rangesPath);
 	if (syntax == "c") {
 		auto pipe = rmap::Pipe<rmap::SyntaxC>(inputPath, outputPath, prefix);

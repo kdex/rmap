@@ -28,7 +28,7 @@ std::string rmap::SyntaxC::write(const MapContext &context) {
 		<< buildArray("dumpOffsets", [](MapInfo &&mapInfo) {
 			return mapInfo.to;
 		}) << EOL
-		<< "size_t toDumpSpace(size_t location, size_t *mappedLocation) {" << EOL
+		<< "size_t " << context.prefix << "toDumpSpace(size_t location, size_t *mappedLocation) {" << EOL
 		<< T << "for (size_t i = 0u; i < " << context.mapInfos.size() << "; ++i) {" << EOL
 		<< T << T << "if (location >= sourceOffsets[i]) {" << EOL
 		<< T << T << T << "const size_t offset = location - sourceOffsets[i];" << EOL
@@ -106,7 +106,7 @@ std::string rmap::SyntaxES::write(const MapContext &context) {
 		<< buildArray("dumpOffsets", [](MapInfo &&mapInfo) {
 			return mapInfo.to;
 		}) << EOL
-		<< "export const toDumpSpace = location => {" << EOL
+		<< "export const " << context.prefix << "toDumpSpace = location => {" << EOL
 		<< T << "for (let i = 0; i < " << context.mapInfos.size() << "; ++i) {" << EOL
 		<< T << T << "if (location >= sourceOffsets[i]) {" << EOL
 		<< T << T << T << "const offset = location - sourceOffsets[i];" << EOL

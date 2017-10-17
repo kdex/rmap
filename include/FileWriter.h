@@ -16,7 +16,8 @@ namespace rmap {
 				mapInfos.push_back({ start, end, to });
 			}
 			void write() {
-				const MapContext context(mapInfos, prefix);
+				const auto validPrefix = prefix.empty() ? syntax.prefix : prefix;
+				const MapContext context(mapInfos, validPrefix);
 				const std::string module = syntax.write(context);
 				outputFile << module;
 			}
