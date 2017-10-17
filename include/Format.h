@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
-#include <functional>
 #include <iomanip>
+#include <functional>
 #include "MapContext.h"
 namespace rmap::Format {
 	std::string hex(std::size_t n);

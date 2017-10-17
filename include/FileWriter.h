@@ -5,25 +5,35 @@
 #include "Syntax.h"
 #include "MapInfo.h"
 #include "MapContext.h"
+#include "PipeContext.h"
 namespace rmap {
 	template<typename Syntax>
 	class FileWriter {
 		public:
-			FileWriter(const std::string &prefix, const std::string &outputPath)
-				: prefix(prefix)
-				, outputFile(outputPath) {}
+			FileWriter(PipeContext &pipeContext) : pipeContext(pipeContext) {
+				configure(pipeContext);
+				outputFile = std::ofstream(pipeContext.outputPath + "." + pipeContext.extension);
+			}
 			void addMapping(std::size_t start, std::size_t end, std::size_t to) {
 				mapInfos.push_back({ start, end, to });
 			}
 			void write() {
-				const auto validPrefix = prefix.empty() ? syntax.prefix : prefix;
-				const MapContext context(mapInfos, validPrefix);
-				const std::string module = syntax.write(context);
+				const MapContext mapContext = { mapInfos, pipeContext };
+				const std::string module = syntax.write(mapContext);
 				outputFile << module;
 			}
 			Syntax syntax;
 		private:
-			const std::string prefix;
+			const PipeContext &configure(PipeContext &context) {
+				if (pipeContext.prefix.empty()) {
+					pipeContext.prefix = syntax.prefix;
+				}
+				if (pipeContext.extension.empty()) {
+					pipeContext.extension = syntax.extension;
+				}
+				return context;
+			}
+			PipeContext &pipeContext;
 			std::ofstream outputFile;
 			std::vector<MapInfo> mapInfos;
 	};

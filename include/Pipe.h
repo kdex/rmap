@@ -2,6 +2,7 @@
 #include <fstream>
 #include "FileWriter.h"
 #include "File.h"
+#include "PipeContext.h"
 namespace rmap {
 	template<typename Syntax>
 	struct Pipe {
@@ -11,11 +12,11 @@ namespace rmap {
 		std::size_t mostRecentStart = 0, mostRecentEnd = 0;
 		std::string prefix = "";
 		FileWriter<Syntax> writer;
-		Pipe(const std::string &inputPath, const std::string &outputPath, const std::string &prefix)
-			: input(File::open(inputPath))
+		Pipe(PipeContext &context)
+			: input(File::open(context.inputPath))
 			, inputSize(input.tellg())
-			, output(std::ofstream(outputPath, std::ios::binary))
-			, writer(FileWriter<Syntax>(prefix, outputPath + ".h")) {
+			, output(std::ofstream(context.outputPath, std::ios::binary))
+			, writer(FileWriter<Syntax>(context)) {
 			input.seekg(0);
 		}
 		Pipe(const Pipe &) = delete;

@@ -28,7 +28,7 @@ std::string rmap::SyntaxC::write(const MapContext &context) {
 		<< buildArray("dumpOffsets", [](MapInfo &&mapInfo) {
 			return mapInfo.to;
 		}) << EOL
-		<< "size_t " << context.prefix << "toDumpSpace(size_t location, size_t *mappedLocation) {" << EOL
+		<< "size_t " << context.pipeContext.prefix << context.pipeContext.functionName << "(size_t location, size_t *mappedLocation) {" << EOL
 		<< T << "for (size_t i = 0u; i < " << context.mapInfos.size() << "; ++i) {" << EOL
 		<< T << T << "if (location >= sourceOffsets[i]) {" << EOL
 		<< T << T << T << "const size_t offset = location - sourceOffsets[i];" << EOL
@@ -57,7 +57,7 @@ std::string rmap::SyntaxCpp::write(const MapContext &context) {
 		<< "#include <cstdint>" << EOL
 		<< "#include <iomanip>" << EOL
 		<< "#include <sstream>" << EOL
-		<< "namespace " << context.prefix << " {" << EOL
+		<< "namespace " << context.pipeContext.prefix << " {" << EOL
 		<< T << buildArray("sourceOffsets", [](MapInfo &&mapInfo) {
 			return mapInfo.start;
 		}) << EOL
@@ -67,7 +67,7 @@ std::string rmap::SyntaxCpp::write(const MapContext &context) {
 		<< T << buildArray("dumpOffsets", [](MapInfo &&mapInfo) {
 			return mapInfo.to;
 		}) << EOL
-		<< T << "std::size_t toDumpSpace(std::size_t location) {" << EOL
+		<< T << "std::size_t " << context.pipeContext.functionName << "(std::size_t location) {" << EOL
 		<< T << T << "for (auto i = 0u; i < " << context.mapInfos.size() << "; ++i) {" << EOL
 		<< T << T << T << "if (location >= sourceOffsets[i]) {" << EOL
 		<< T << T << T << T << "const auto offset = location - sourceOffsets[i];" << EOL
@@ -106,7 +106,7 @@ std::string rmap::SyntaxES::write(const MapContext &context) {
 		<< buildArray("dumpOffsets", [](MapInfo &&mapInfo) {
 			return mapInfo.to;
 		}) << EOL
-		<< "export const " << context.prefix << "toDumpSpace = location => {" << EOL
+		<< "export const " << context.pipeContext.prefix << context.pipeContext.functionName << " = location => {" << EOL
 		<< T << "for (let i = 0; i < " << context.mapInfos.size() << "; ++i) {" << EOL
 		<< T << T << "if (location >= sourceOffsets[i]) {" << EOL
 		<< T << T << T << "const offset = location - sourceOffsets[i];" << EOL
