@@ -28,7 +28,7 @@ std::string rmap::SyntaxC::write(const MapContext &context) {
 		<< buildArray("dumpOffsets", [](MapInfo &&mapInfo) {
 			return mapInfo.to;
 		}) << EOL
-		<< "size_t " << context.pipeContext.prefix << context.pipeContext.functionName << "(size_t location, size_t *mappedLocation) {" << EOL
+		<< "bool " << context.pipeContext.prefix << context.pipeContext.functionName << "(size_t location, size_t *mappedLocation) {" << EOL
 		<< T << "for (size_t i = 0u; i < " << context.mapInfos.size() << "; ++i) {" << EOL
 		<< T << T << "if (location >= sourceOffsets[i]) {" << EOL
 		<< T << T << T << "const size_t offset = location - sourceOffsets[i];" << EOL
