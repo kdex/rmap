@@ -1,5 +1,6 @@
 # rmap
 `rmap` is a range extractor and address mapping generator. It can be used to significantly reduce the filesize of arbitrary files without changing the code that accesses them. To achieve this, `rmap` doesn't compress your file, but rather extracts specified byte ranges which are then contiguously placed in a dump. Moreover, `rmap` generates an address mapper that takes the *original file offset address* and maps it to a *dump file offset address*. Depending on the options provided, the address mapper can be emitted as a C/C++ header file or as an ECMAScript module.
+
 ![2017-10-18-01-54-](https://user-images.githubusercontent.com/4442505/31694914-4e943210-b3a7-11e7-98cf-773e420fb13d.png)
 ## Inputs
 - A file from which you need to generate a partial dump
