@@ -37,5 +37,5 @@ std::size_t toDumpSpace(std::size_t location);
 * If `location` is not in the dump, this function throws.
 * Input and output values are of type `Number`.
 */
-export const toDumpSpace = const location => { … };
+export const toDumpSpace = location => { … };
 ```
