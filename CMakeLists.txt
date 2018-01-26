@@ -72,7 +72,9 @@ add_executable(${PROJECT_NAME}
 	src/${PROJECT_NAME}.cc
 	src/File.cc
 	src/Format.cc
-	src/Syntax.cc
+	src/syntax/c.cc
+	src/syntax/c++.cc
+	src/syntax/es.cc
 )
 add_dependencies(${PROJECT_NAME} apx-git)
 target_link_libraries(${PROJECT_NAME}
