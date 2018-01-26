@@ -88,7 +88,7 @@ int main(int argc, const char *argv[]) {
 			config
 				.name("OUTPUT")
 				.description("The output file.")
-				.optional("dump.dat");
+				.optional("dump.bin");
 		});
 	auto config = parser.parse(argc, argv);
 	if (config.argument["INPUT"].values.empty() || config.option["help"]) {
